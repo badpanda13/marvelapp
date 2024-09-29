@@ -1,5 +1,13 @@
 @import '../../style/variables.scss';
 
+.truncate {
+    -webkit-line-clamp: 2; /* Число отображаемых строк */
+    display: -webkit-box; /* Включаем флексбоксы */
+    -webkit-box-orient: vertical; /* Вертикальная ориентация */
+    overflow: hidden; /* Обрезаем всё за пределами блока */
+   
+    text-overflow: ellipsis; /* Добавляем многоточие */
+}
 .randomchar {
     display: grid;
     grid-template-columns: repeat(2, 50%);
