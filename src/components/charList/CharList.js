@@ -30,9 +30,10 @@ class CharList extends Component {
     }
 
     render(){
-        const ulContent = (this.state.chars && typeof(this.state.chars)!=="undefined") ? this.getView(this.state.chars) : '';
+        const chars = this.state.chars
+        const ulContent = ( chars && typeof(chars)!=="undefined") ? this.getView(chars) : '';
         return (
-            <div className="char__list">
+            <div className="char__list" >
                 {ulContent}
                 <button className="button button__main button__long">
                     <div className="inner">load more</div>
@@ -56,7 +57,7 @@ class CharList extends Component {
         const imgStyle = (thumbnail === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg") ? {'objectFit': 'contain'} : {'objectFit': 'cover'};
         const className = this.id === this.selected ? "char__item char__item_selected" : "char__item";
         return (
-            <li key={id} className={className} onClick={this.selectChar(id)}>
+            <li key={id} className={className} onClick={() => this.props.onSelectChar(id)}>
             <img src={thumbnail} alt={name} style={imgStyle}/>
             <div className="char__name">{name}</div>
         </li>

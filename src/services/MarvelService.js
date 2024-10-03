@@ -115,13 +115,13 @@ class  MarvelService {
     }
 
     _transformCharacter = (char) => {
-       // console.log(`_transformCharacter: ${char.thumbnail} + . + ${char.thumbnail.extenSion}`);
         return {name: char.name,
                 description: char.description,
                 thumbnail: char.thumbnail.path + '.' + char.thumbnail.extension,
                 homepage: char.urls[0].url,
                 wiki: char.urls[1].url,
-                id: char.id
+                id: char.id,
+                comics: (char.comics.items) ? char.comics.items.slice(10) : []
         }
     }
 }
