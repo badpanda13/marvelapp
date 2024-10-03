@@ -53,11 +53,12 @@ class CharList extends Component {
 
     getViewChar = (char) => {
         const {id, name,  thumbnail} = char;
+        const imgStyle = (thumbnail === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg") ? {'objectFit': 'contain'} : {'objectFit': 'cover'};
         const className = this.id === this.selected ? "char__item char__item_selected" : "char__item";
         return (
-            <li className={className} onClick={this.selectChar(id)}>
-            <img src={thumbnail} alt={name}/>
-            <div className="char__name">{this.name}</div>
+            <li key={id} className={className} onClick={this.selectChar(id)}>
+            <img src={thumbnail} alt={name} style={imgStyle}/>
+            <div className="char__name">{name}</div>
         </li>
         )
     }
