@@ -4,6 +4,7 @@ class  MarvelService {
 
     _apiBase = 'https://gateway.marvel.com:443/v1/public/';
     _apiKey = 'apikey=2d52357d6dcd674350fed1e75564f923';
+    _baseOffset = 210;
 
     //for work without internet
     dataArray = [ 
@@ -91,27 +92,14 @@ class  MarvelService {
         return await res.json();
     }
 
-    getAllCharacters = async () => {
-        const res = await this.getResource(`${this._apiBase}characters?limit=9&offset=210&${this._apiKey}`);
+    getAllCharacters = async (offset = this._baseOffset) => {
+        const res = await this.getResource(`${this._apiBase}characters?limit=9&offset=${offset}&${this._apiKey}`);
         return res.data.results.map(this._transformCharacter);
-      
-       //return this.dataArray; //for work without internet
-    }
-
-
-    getCharacters = async (limit) => {
-        const limitQuery = (limit && Number.isInteger(+limit) && limit > 0 ) ? `limit=${limit}&` : '';
-        const res = await this.getResource(`${this._apiBase}characters?${limitQuery}offset=210&${this._apiKey}`);
-        const arr = res.data.results.map(this._transformCharacter);
-        return arr;
-        
-        //return this.dataArray; //for work without internet
     }
 
     getCharacter = async (id) => {
         const res = await this.getResource(`${this._apiBase}characters/${id}?limit=9&offset=210&${this._apiKey}`);
         return this._transformCharacter(res.data.results[0]);
-        //return this.dataArray[0]; //for work without internet
     }
 
     _transformCharacter = (char) => {

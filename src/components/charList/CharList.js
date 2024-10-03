@@ -1,24 +1,47 @@
 import { Component } from 'react';
+import ErrorMessage from '../errorMessage/ErrorMessage';
+import Spinner from '../spinner/Spinner';
 import MarvelService from '../../services/MarvelService';
 import './charList.scss';
 
 class CharList extends Component {
 
     state = {
-        chars:[],
-        selected:''
+        charList:[],
+        selected:'',
+        newItemLoading: false,
+        loading: true,
+        error: false,
+        offset: 1530,
+        charEnded: false
     }
 
     marvelService = new MarvelService();
 
-    onCharLoaded =(chars) => {
-        this.setState({chars});
+    onCharListLoaded = (newCharList) => {
+        let ended = false;
+        if (newCharList.length < 9) {
+            ended = true;
+        }
+
+        this.setState(({offset, charList}) => ({
+            charList: [...charList, ...newCharList],
+            loading: false,
+            newItemLoading: false,
+            offset: offset + 9,
+            charEnded: ended
+        }))
     }
 
-    updateCharacters = () => {
-        this.marvelService.getCharacters(9).then(
-            this.onCharLoaded
-        );
+    onError = () => {
+        this.setState({eror: true, loading: false});
+    }
+
+    onRequest = (offset) => {
+        this.onCharListLoading();
+        this.marvelService.getAllCharacters(offset).then(
+            this.onCharListLoaded
+        ).catch(this.onError);
     }
 
     selectChar =(id) => {
@@ -26,16 +49,28 @@ class CharList extends Component {
     } 
 
     componentDidMount(){
-        this.updateCharacters(); 
+        this.onRequest(); 
     }
 
+    onCharListLoading = () => {
+        this.setState({newItemLoading: true});
+
+    }
     render(){
-        const chars = this.state.chars
+        const chars = this.state.charList;
+        const {offset, newItemLoading, error, loading, charEnded} = this.state;
         const ulContent = ( chars && typeof(chars)!=="undefined") ? this.getView(chars) : '';
+        const errorMessage = error ? <ErrorMessage/> : null;
+        const spinner = loading ? <Spinner/> : null;
         return (
             <div className="char__list" >
+                {errorMessage}
+                {spinner}
                 {ulContent}
-                <button className="button button__main button__long">
+                <button className="button button__main button__long"
+                onClick={() => this.onRequest(offset)}
+                disabled={newItemLoading}
+                style={{'display': charEnded ? 'none' : 'block'}}>
                     <div className="inner">load more</div>
                 </button>
             </div>
