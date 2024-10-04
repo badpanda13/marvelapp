@@ -18,6 +18,13 @@ class CharList extends Component {
 
     marvelService = new MarvelService();
 
+    onSelectChar = (charId) => {
+       // console.log("select char in list " +charId+ " and "+this.state.selected);
+        this.setState({selected: charId});
+        console.log("select 2char in list " +charId+ " and "+this.state.selected);
+        this.props.onSelectChar(charId);
+    }
+
     onCharListLoaded = (newCharList) => {
         let ended = false;
         if (newCharList.length < 9) {
@@ -57,6 +64,7 @@ class CharList extends Component {
 
     }
     render(){
+        console.log("selected "+this.selected);
         const chars = this.state.charList;
         const {offset, newItemLoading, error, loading, charEnded} = this.state;
         const ulContent = ( chars && typeof(chars)!=="undefined") ? this.getView(chars) : '';
@@ -90,9 +98,9 @@ class CharList extends Component {
     getViewChar = (char) => {
         const {id, name,  thumbnail} = char;
         const imgStyle = (thumbnail === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg") ? {'objectFit': 'contain'} : {'objectFit': 'cover'};
-        const className = this.id === this.selected ? "char__item char__item_selected" : "char__item";
+        const className = (id === this.state.selected) ? "char__item char__item_selected" : "char__item";
         return (
-            <li key={id} className={className} onClick={() => this.props.onSelectChar(id)}>
+            <li key={id} className={className} onClick={() => {this.onSelectChar(id)}}>
             <img src={thumbnail} alt={name} style={imgStyle}/>
             <div className="char__name">{name}</div>
         </li>

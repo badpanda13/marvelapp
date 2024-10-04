@@ -13,10 +13,21 @@ class App extends Component {
         selectedChar: null
     }
 
+    
     onSelectChar = (charId) => {
+       // this.myRef.
+       console.log("api select: "+charId);
         this.setState({selectedChar : charId});
     }
 
+    setInputRef = (elem) => {
+        this.myRef = elem;
+        if(elem !== this.selectedCharRef) {
+            //меняем классы
+           // this.selectedCharRef.changeClassNameUnselect();
+            this.selectedCharRef = elem;
+        }
+    }
     render() {    
         return (
             <div className="app">
@@ -27,7 +38,7 @@ class App extends Component {
                     </ErrorBoundary>
                     <div className="char__content">
                         <ErrorBoundary>
-                        <   CharList onSelectChar={this.onSelectChar}/>
+                        <   CharList ref={this.setInputRef} onSelectChar={this.onSelectChar}/>
                         </ErrorBoundary>
                         <ErrorBoundary>
                             <CharInfo selectedCharId = {this.state.selectedChar}/>

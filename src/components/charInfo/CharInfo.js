@@ -2,6 +2,7 @@ import { Component } from 'react';
 import MarvelService from '../../services/MarvelService';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
+import PropTypes from 'prop-types';
 import Skeleton from '../skeleton/Skeleton';  
 import './charInfo.scss';
 
@@ -115,5 +116,8 @@ class CharInfo extends Component {
         )
     }
 
+CharInfo.propTypes = {
+    charId: PropTypes.number
+}
 
 export default CharInfo;

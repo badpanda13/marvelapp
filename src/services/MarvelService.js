@@ -14,7 +14,8 @@ class  MarvelService {
             thumbnail: "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.undefined",
             homepage: "http://marvel.com/characters/384/captain_flint?utm_campaign=apiRef&utm_source=2d52357d6dcd674350fed1e75564f923",
             wiki: "http://marvel.com/comics/characters/1011196/captain_flint?utm_campaign=apiRef&utm_source=2d52357d6dcd674350fed1e75564f923",
-            id: 1011196
+            id: 1011196,
+            comics: []
         },
         {
             name: "Captain Marvel (Carol Danvers)",
@@ -22,7 +23,8 @@ class  MarvelService {
             thumbnail: "http://i.annihil.us/u/prod/marvel/i/mg/6/80/5269608c1be7a.undefined",
             homepage: "http://marvel.com/characters/9/captain_marvel?utm_campaign=apiRef&utm_source=2d52357d6dcd674350fed1e75564f923",
             wiki: "http://marvel.com/universe/Ms._Marvel_(Carol_Danvers)?utm_campaign=apiRef&utm_source=2d52357d6dcd674350fed1e75564f923",
-            id: 1010338
+            id: 1010338,
+            comics: []
         },
         {
             name: "Captain Marvel (Genis-Vell)",
@@ -30,7 +32,8 @@ class  MarvelService {
             thumbnail: "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.undefined",
             homepage: "http://marvel.com/characters/9/captain_marvel?utm_campaign=apiRef&utm_source=2d52357d6dcd674350fed1e75564f923",
             wiki: "http://marvel.com/universe/Photon_(Genis-Vell)?utm_campaign=apiRef&utm_source=2d52357d6dcd674350fed1e75564f923",
-            id: 1011096
+            id: 1011096,
+            comics: []
         },
         {
             name: "Captain Marvel (Mar-Vell)",
@@ -38,7 +41,8 @@ class  MarvelService {
             thumbnail: "http://i.annihil.us/u/prod/marvel/i/mg/f/60/526032048d1a1.undefined",
             homepage: "http://marvel.com/characters/1009224/captain_marvel_mar-vell/featured?utm_campaign=apiRef&utm_source=2d52357d6dcd674350fed1e75564f923",
             wiki: "http://marvel.com/universe/Captain_Marvel_(Mar-Vell)?utm_campaign=apiRef&utm_source=2d52357d6dcd674350fed1e75564f923",
-            id: 1009224
+            id: 1009224,
+            comics: []
         },
         {
             name: "Captain Marvel (Monica Rambeau)",
@@ -46,7 +50,8 @@ class  MarvelService {
             thumbnail: "http://i.annihil.us/u/prod/marvel/i/mg/9/00/4c0030bee8c86.undefined",
             homepage: "http://marvel.com/characters/9/captain_marvel?utm_campaign=apiRef&utm_source=2d52357d6dcd674350fed1e75564f923",
             wiki: "http://marvel.com/universe/Rambeau,%20Monica?utm_campaign=apiRef&utm_source=2d52357d6dcd674350fed1e75564f923",
-            id: 1011095
+            id: 1011095,
+            comics: []
         },
         {
             name: "Captain Marvel (Phyla-Vell)",
@@ -62,7 +67,8 @@ class  MarvelService {
             thumbnail: "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.undefined",
             homepage: "http://marvel.com/characters/386/captain_midlands?utm_campaign=apiRef&utm_source=2d52357d6dcd674350fed1e75564f923",
             wiki: "http://marvel.com/universe/Captain_Midlands?utm_campaign=apiRef&utm_source=2d52357d6dcd674350fed1e75564f923",
-            id: 1011355
+            id: 1011355,
+            comics: []
         },
         {
             name: "Captain Stacy",
@@ -70,7 +76,8 @@ class  MarvelService {
             thumbnail: "http://i.annihil.us/u/prod/marvel/i/mg/2/a0/4c00407752be2.undefined",
             homepage: "http://marvel.com/characters/390/captain_stacy?utm_campaign=apiRef&utm_source=2d52357d6dcd674350fed1e75564f923",
             wiki: "http://marvel.com/universe/Stacy%2C_George?utm_campaign=apiRef&utm_source=2d52357d6dcd674350fed1e75564f923",
-            id: 1009225
+            id: 1009225,
+            comics: []
         },
         {
             name: "Captain Universe",
@@ -78,7 +85,8 @@ class  MarvelService {
             thumbnail: "http://i.annihil.us/u/prod/marvel/i/mg/4/c0/4c00324c12ba2.undefined",
             homepage: "http://marvel.com/characters/392/captain_universe?utm_campaign=apiRef&utm_source=2d52357d6dcd674350fed1e75564f923",
             wiki: "http://marvel.com/universe/Captain_Universe?utm_campaign=apiRef&utm_source=2d52357d6dcd674350fed1e75564f923",
-            id: 1011027
+            id: 1011027,
+            comics: []
         }
     ];
 
@@ -93,13 +101,17 @@ class  MarvelService {
     }
 
     getAllCharacters = async (offset = this._baseOffset) => {
-        const res = await this.getResource(`${this._apiBase}characters?limit=9&offset=${offset}&${this._apiKey}`);
-        return res.data.results.map(this._transformCharacter);
+      //  const res = await this.getResource(`${this._apiBase}characters?limit=9&offset=${offset}&${this._apiKey}`);
+      //  return res.data.results.map(this._transformCharacter);
+
+      return this.dataArray;
     }
 
     getCharacter = async (id) => {
-        const res = await this.getResource(`${this._apiBase}characters/${id}?limit=9&offset=210&${this._apiKey}`);
-        return this._transformCharacter(res.data.results[0]);
+      //  const res = await this.getResource(`${this._apiBase}characters/${id}?limit=9&offset=210&${this._apiKey}`);
+       // return this._transformCharacter(res.data.results[0]);
+       return (this.dataArray[0]);
+       
     }
 
     _transformCharacter = (char) => {
