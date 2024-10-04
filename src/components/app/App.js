@@ -2,6 +2,7 @@ import AppHeader from "../appHeader/AppHeader";
 import RandomChar from "../randomChar/RandomChar";
 import { Component } from "react";
 import CharList from "../charList/CharList";
+import PropTypes from 'prop-types';
 import CharInfo from "../charInfo/CharInfo";
 import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 import decoration from '../../resources/img/vision.png';
@@ -37,6 +38,10 @@ class App extends Component {
             </div>
         )
     }   
+}
+
+App.propTypes = {
+    onSelectChar : PropTypes.func
 }
 
 export default App;
