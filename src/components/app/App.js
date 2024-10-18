@@ -6,10 +6,12 @@ import PropTypes from 'prop-types';
 import CharInfo from "../charInfo/CharInfo";
 import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 import decoration from '../../resources/img/vision.png';
+import ComicsList from "../comicsList/ComicsList";
 
  const App = () => {
 
     const [selectedChar, setChar] = useState(null);
+    const [comicsList, setComicsListhar] = useState(null);
     
     const onSelectChar = (charId) => {
        setChar(charId);
@@ -23,11 +25,14 @@ import decoration from '../../resources/img/vision.png';
                         <RandomChar/>
                     </ErrorBoundary>
                     <div className="char__content">
+                    <ErrorBoundary>
+                        <ComicsList charId = {selectedChar} hidden={selectedChar ? false : true}/>
+                    </ErrorBoundary>
                         <ErrorBoundary>
                         <   CharList onCharSelected={onSelectChar}/>
                         </ErrorBoundary>
                         <ErrorBoundary>
-                            <CharInfo charId = {selectedChar}/>
+                            <CharInfo charId = {selectedChar} />
                         </ErrorBoundary>
                     </div>
                     <img className="bg-decoration" src={decoration} alt="vision"/>
