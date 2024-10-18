@@ -27,7 +27,7 @@ import decoration from '../../resources/img/vision.png';
                         <   CharList onCharSelected={onSelectChar}/>
                         </ErrorBoundary>
                         <ErrorBoundary>
-                            <CharInfo selectedCharId = {selectedChar}/>
+                            <CharInfo charId = {selectedChar}/>
                         </ErrorBoundary>
                     </div>
                     <img className="bg-decoration" src={decoration} alt="vision"/>
