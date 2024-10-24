@@ -1,49 +1,30 @@
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+//import { Router, Route, Routes} from 'react-router-dom';
+import {MainPage, ComicsPage, Page404, SingleComicPage} from '../pages';
 import AppHeader from "../appHeader/AppHeader";
-import RandomChar from "../randomChar/RandomChar";
-import { useState } from "react";
-import CharList from "../charList/CharList";
-import PropTypes from 'prop-types';
-import CharInfo from "../charInfo/CharInfo";
-import ErrorBoundary from "../errorBoundary/ErrorBoundary";
-import decoration from '../../resources/img/vision.png';
-import ComicsList from "../comicsList/ComicsList";
 
- const App = () => {
 
-    const [selectedChar, setChar] = useState(null);
-    const [comicsList, setComicsListhar] = useState(null);
+const App = () => {
     
-    const onSelectChar = (charId) => {
-       setChar(charId);
-    }
-   
-        return (
+    return (
+        <Router>
             <div className="app">
                 <AppHeader/>
                 <main>
-                    <ErrorBoundary>
-                        <RandomChar/>
-                    </ErrorBoundary>
-                    <div className="char__content">
-                    <ErrorBoundary>
-                        <ComicsList charId = {selectedChar} hidden={selectedChar ? false : true}/>
-                    </ErrorBoundary>
-                        <ErrorBoundary>
-                        <   CharList onCharSelected={onSelectChar}/>
-                        </ErrorBoundary>
-                        <ErrorBoundary>
-                            <CharInfo charId = {selectedChar} />
-                        </ErrorBoundary>
-                    </div>
-                    <img className="bg-decoration" src={decoration} alt="vision"/>
+                    <Routes>
+                        <Route  path="/" element={<MainPage />} />
+                         
+                        <Route  path="/comics" element={<ComicsPage />}/>
+                            
+                        <Route  path="/comics/:comicId" element={<SingleComicPage />} />
+                            
+                        <Route path="*" element={<Page404 />} />
+                           
+                    </Routes>
                 </main>
             </div>
-        )
-    }   
-
-
-App.propTypes = {
-    onSelectChar : PropTypes.func
+        </Router>
+    )
 }
 
 export default App;
