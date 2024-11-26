@@ -1,4 +1,4 @@
-App for stydy java script and react. App witch shows marvel characters and comics. You can see the details of selected character or choose the random character.
+App for study java script and react. App witch shows marvel characters and comics. You can see the details of selected character or choose the random character.
 
 You can see the result at the vercel: https://marvelapp-sooty.vercel.app/ 
 
